@@ -51,8 +51,8 @@ pipeline {
 						 //bat "\"${scannerHome}\\StartSonar.bat\"" -D sonar.login=admin -D sonar.password=admin@123
                          bat label: '', script: 'mvn sonar:sonar'
 						//}				
-		        }   
-		   }		
+		       // }   
+		   //}		
 		     stage('Quality Gate') {
                 steps {
                       timeout(time: 1, unit: 'HOURS') {
