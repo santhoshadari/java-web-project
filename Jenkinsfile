@@ -33,11 +33,11 @@ pipeline {
                         }*/
 		        steps {
 				         //bat label: '', script: 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
-				         //def scannerHome = tool 'sonarqubescanner';
+				         def scannerHome = tool 'sonarqubescanner';
 						 withSonarQubeEnv ('sonarqube') {
 					     //bat "${scannerHome}/bin/sonar-scanner"
-						 //bat "${scannerHome}\\bin\\sonar-scanner.bat -D sonar.login=admin -D sonar.password=admin@123"
-                         bat label: '', script: 'mvn sonar:sonar'
+						 bat "\"${scannerHome}\\StartSonar.bat -D sonar.login=admin -D sonar.password=admin@123""
+                         //bat label: '', script: 'mvn sonar:sonar'
 						}				
 		        }   
 		   }		
