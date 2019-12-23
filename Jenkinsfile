@@ -35,8 +35,10 @@ pipeline {
 		        steps {
 				    bat label: '', script: 'mvn package'
 				} 
-		   }	
-	        /*stage('Sonarqube analysis') {
+		   }
+        }
+    }		
+/*	        stage('Sonarqube analysis') {
 			    /*environment {
                          scannerHome = tool 'sonarqubescanner'
 						 //withSonarQubeEnv(credentialsId: '1c3e7544-b78d-49db-abd4-c3176710fb90', installationName: 'sonarqubescanner') { // You can override the credential to be used
@@ -60,6 +62,6 @@ pipeline {
 						  }
                     }
                 }
-            }*/
+            }
 		}
-    }
+    }*/
