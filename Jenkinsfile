@@ -16,7 +16,17 @@ pipeline {
 			       git 'https://github.com/santhoshadari/java-web-project.git'
 			   }
 			}
-		    stage('Maven compile') {
+		    stage('Maven install') {
+		        steps {
+				    bat label: '', script: 'mvn clean install'
+				} 
+		   }	
+			stage('Maven sonarscan') {
+		        steps {
+				    bat label: '', script: 'mvn sonar:sonar'
+				} 
+		   }	
+			stage('Maven compile') {
 		        steps {
 				    bat label: '', script: 'mvn clean validate compile'
 				} 
@@ -26,7 +36,7 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }	
-	        stage('Sonarqube analysis') {
+	        /*stage('Sonarqube analysis') {
 			    /*environment {
                          scannerHome = tool 'sonarqubescanner'
 						 //withSonarQubeEnv(credentialsId: '1c3e7544-b78d-49db-abd4-c3176710fb90', installationName: 'sonarqubescanner') { // You can override the credential to be used
@@ -40,7 +50,7 @@ pipeline {
                          bat label: '', script: 'mvn sonar:sonar'
 						//}				
 		        }   
-		   }		
+		   }*/		
 		   /*stage('Quality Gate') {
                 steps {
                       timeout(time: 1, unit: 'HOURS') {
