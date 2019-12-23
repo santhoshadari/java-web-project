@@ -16,6 +16,15 @@ pipeline {
 			       git 'https://github.com/santhoshadari/java-web-project.git'
 			   }
 			}
-			
+		    stage('Maven compile') {
+		        steps {
+				    bat label: '', script: 'mvn clean validate compile'
+				} 
+		   }	
+			stage('Maven package') {
+		        steps {
+				    bat label: '', script: 'mvn package'
+				} 
+		   }	
 		}
  }
