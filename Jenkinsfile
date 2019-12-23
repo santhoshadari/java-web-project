@@ -26,5 +26,13 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }	
+	        stage('Sonarqube') {
+			    environment {
+                         scannerHome = tool 'sonarqubescanner'
+                        }
+		        steps {
+				    bat label: '', script: '${scannerHome}/bin/sonar-scanner'
+				} 
+		   }		
 		}
  }
