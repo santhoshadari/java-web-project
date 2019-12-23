@@ -36,7 +36,7 @@ pipeline {
 				         def scannerHome = tool 'sonarqubescanner';
 						 withSonarQubeEnv ('sonarqube') {
 					     //bat "${scannerHome}/bin/sonar-scanner"
-						 bat "\"${scannerHome}\\StartSonar.bat -D sonar.login=admin -D sonar.password=admin@123""
+						 bat "\"${scannerHome}\\StartSonar.bat\ -D sonar.login=admin -D sonar.password=admin@123""
                          //bat label: '', script: 'mvn sonar:sonar'
 						}				
 		        }   
