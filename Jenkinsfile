@@ -26,24 +26,28 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }	
-	        stage('Sonarqube') {
+	        stage('Sonarqube analysis') {
 			    /*environment {
                          scannerHome = tool 'sonarqubescanner'
 						 //withSonarQubeEnv(credentialsId: '1c3e7544-b78d-49db-abd4-c3176710fb90', installationName: 'sonarqubescanner') { // You can override the credential to be used
                         }*/
 		        steps {
-				       //bat label: '', script: 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
-				         def scannerHome = tool 'sonarqubescanner';
+				         //bat label: '', script: 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
+				         //def scannerHome = tool 'sonarqubescanner';
 						 withSonarQubeEnv ('sonarqube') {
 					     //bat "${scannerHome}/bin/sonar-scanner"
-						 bat "\"${scannerHome}\\bin\\sonar-scanner.bat -D sonar.login=admin -D sonar.password=admin@123""
-                        }				
+						 //bat "${scannerHome}\\bin\\sonar-scanner.bat -D sonar.login=admin -D sonar.password=admin@123"
+                         bat label: '', script: 'mvn sonar:sonar'
+						}				
 		        }   
 		   }		
 		   stage('Quality Gate') {
                 steps {
                       timeout(time: 1, unit: 'HOURS') {
-                      waitForQualityGate abortPipeline: true
+                          def gg = waitForQualityGate()
+					      if (gg.status != 'ok') {
+						    error "pipeline aborted due to quality gate failure: $(gg.status)"
+						  }
                     }
                 }
             }
