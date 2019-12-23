@@ -34,7 +34,8 @@ pipeline {
 		        steps {
 				       //bat label: '', script: 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
 				     withSonarQubeEnv('sonarqube'){
-					     bat "${scannerHome}/bin/sonar-scanner"
+					     //bat "${scannerHome}/bin/sonar-scanner"
+						 bat "\"${scannerHome}\\bin\\sonar-scanner.bat\""
                         }				
 		        }   
 		   }		
