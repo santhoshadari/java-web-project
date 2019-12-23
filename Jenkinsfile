@@ -34,7 +34,7 @@ pipeline {
 		        steps {
 				    //bat label: '', script: 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.6.0.1398:sonar'
 				     withSonarQubeEnv('sonarqube'){
-					     bat label: '', script: '${scannerHome}/bin/sonar-scanner'
+					     bat label: '', script: '${scannerHome}\bin\sonar-scanner'
                         }                      
 					  timeout(time: 10, unit: 'MINUTES') {
                                  waitForQualityGate abortPipeline: true
