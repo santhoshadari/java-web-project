@@ -36,7 +36,7 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }
-            stage('Maven package') {
+            stage('Package publish nexus') {
 		        steps {
 				    nexusPublisher nexusInstanceId: 'sonarnexuslocal3', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '\\target\\java-web-project-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: 'java-web-project', groupId: 'com.sampleweb.web', packaging: 'war', version: '2.23']]]
 				} 
