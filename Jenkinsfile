@@ -37,11 +37,22 @@ pipeline {
 				} 
 		   }
             stage('Package publish nexus') {
-			     environment {
+			     /*environment {
 				    def pom = readMavenPom file: 'pom.xml'
-				 }
+				 }*/
 			    steps {        
-                     nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
+                    nexusArtifactUploader artifacts: [
+                                 [artifactId: 'java-web-project', classifier: 'debug', file: 'java-web-project-1.0-SNAPSHOT.war', type: 'war'], 
+                                 //[artifactId: 'nexus-artifact-uploader', classifier: 'debug', file: 'nexus-artifact-uploader.hpi', type: 'hpi']
+                                  ], 
+                    credentialsId: 'ed28e1dd-8837-47bb-9acf-d5dffdd5d90f', 
+                    groupId: 'com.sampleweb.web', 
+                    nexusUrl: 'localhost:8081/nexus', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'java-web-project', 
+                    version: '1.0-SNAPSHOT'
+					 /*nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
                            nexusRepositoryId: 'java-web-project', \
                            packages: [[$class: 'MavenPackage', \
                            mavenAssetList: [[classifier: '', extension: '', filePath: "target\\${pom.artifactId}-${pom.version}.${pom.packaging}"], \
@@ -49,7 +60,7 @@ pipeline {
                             mavenCoordinate: [artifactId: "${pom.artifactId}", \
                             groupId: "${pom.groupId}", \
                             packaging: "${pom.packaging}", \
-                            version: "${pom.version}-${env.BUILD_NUMBER}"]]]
+                            version: "${pom.version}-${env.BUILD_NUMBER}"]]]*/
 				}			
             }   
 		}
