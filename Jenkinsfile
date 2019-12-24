@@ -37,6 +37,7 @@ pipeline {
 				} 
 		   }
             stage('Package publish nexus') {
+			    steps {     
                      def pom = readMavenPom file: 'pom.xml'
                      nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
                            nexusRepositoryId: 'java-web-project', \
@@ -47,6 +48,7 @@ pipeline {
                             groupId: "${pom.groupId}", \
                             packaging: "${pom.packaging}", \
                             version: "${pom.version}-${env.BUILD_NUMBER}"]]]
+				}			
             }   
 		}
     }		
