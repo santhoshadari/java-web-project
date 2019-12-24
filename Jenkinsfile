@@ -37,10 +37,17 @@ pipeline {
 				} 
 		   }
             stage('Package publish nexus') {
-		        steps {
-				    nexusPublisher nexusInstanceId: 'sonarnexuslocal3', nexusRepositoryId: 'java-web-project', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '\\target\\java-web-project-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: 'java-web-project', groupId: 'com.sampleweb.web', packaging: 'war', version: '1.0-SNAPSHOT']]]
-				} 
-		   }    
+                     def pom = readMavenPom file: 'pom.xml'
+                     nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
+                           nexusRepositoryId: 'java-web-project', \
+                           packages: [[$class: 'MavenPackage', \
+                           mavenAssetList: [[classifier: '', extension: '', filePath: "target\\${pom.artifactId}-${pom.version}.${pom.packaging}"], \
+                                                    [classifier: 'sources', extension: '', filePath: "target\\${pom.artifactId}-${pom.version}-sources.${pom.packaging}"]], \
+                            mavenCoordinate: [artifactId: "${pom.artifactId}", \
+                            groupId: "${pom.groupId}", \
+                            packaging: "${pom.packaging}", \
+                            version: "${pom.version}-${env.BUILD_NUMBER}"]]]
+            }   
 		}
     }		
 /*	        stage('Sonarqube analysis') {
