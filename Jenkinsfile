@@ -36,7 +36,12 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }
-        }
+            stage('Maven package') {
+		        steps {
+				    nexusPublisher nexusInstanceId: 'sonarnexuslocal3', nexusRepositoryId: 'maven-releases', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: '\target\java-web-project-1.0-SNAPSHOT.war']], mavenCoordinate: [artifactId: 'java-web-project', groupId: 'com.sampleweb.web', packaging: 'war', version: '2.23']]]
+				} 
+		   }    
+		}
     }		
 /*	        stage('Sonarqube analysis') {
 			    environment {
@@ -48,7 +53,7 @@ pipeline {
 				         //def scannerHome = tool 'sonarqubescanner';
 						//withSonarQubeEnv ('sonarqube') {
 					     //bat "${scannerHome}/bin/sonar-scanner"
-						 //bat "\"${scannerHome}\\StartSonar.bat\"" -D sonar.login=admin -D sonar.password=admin@123
+						 //bat "\"${scannerHome}\\StartSonar.bat\"" -D sonar.login=admin -D sonar.password=admin
                          bat label: '', script: 'mvn sonar:sonar'
 						//}				
 		       // }   
