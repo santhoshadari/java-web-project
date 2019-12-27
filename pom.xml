@@ -18,7 +18,7 @@
   <distributionManagement>
    <snapshotRepository>
       <id>nexus-snapshots</id>
-      <url>http://localhost:8081/repository/java-web-project/</url>
+      <url>http://localhost:8081/repository/java-web-project//</url>
    </snapshotRepository>
   </distributionManagement>
   <build>
