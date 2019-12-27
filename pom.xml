@@ -19,7 +19,7 @@
    <snapshotRepository>
       <id>nexus-snapshots</id>
       <url>http://localhost:8081/repository/java-web-project/</url>
-   </snapshotRepository
+   </snapshotRepository>
   </distributionManagement>
   <build>
      <pluginManagement>
