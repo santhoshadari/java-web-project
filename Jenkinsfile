@@ -36,7 +36,7 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }
-		    stage('Maven package') {
+		    stage('Maven deploy') {
 		        steps {
 				    bat label: '', script: 'mvn deploy'
 				} 
