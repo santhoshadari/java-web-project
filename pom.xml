@@ -16,10 +16,10 @@
     </dependency>
   </dependencies>
   <distributionManagement>
-   <Repository>
+   <snapshotRepository>
       <id>nexus-snapshots</id>
-      <url>http://localhost:8081/#admin/repository/repositories:java-web-project</url>
-   </Repository>
+      <url>http://localhost:8081/repository/java-web-project/</url>
+   </snapshotRepository
   </distributionManagement>
   <build>
      <pluginManagement>
