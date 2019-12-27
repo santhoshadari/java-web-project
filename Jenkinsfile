@@ -36,10 +36,17 @@ pipeline {
 				    bat label: '', script: 'mvn package'
 				} 
 		   }
-            stage('Package publish nexus') {
-			     /*environment {
+		    stage('Maven package') {
+		        steps {
+				    bat label: '', script: 'mvn deploy'
+				} 
+		   }
+		}
+    }		
+/*            stage('Package publish nexus') {
+			     environment {
 				    def pom = readMavenPom file: 'pom.xml'
-				 }*/
+				 }
 			    steps {        
                     nexusArtifactUploader artifacts: [
                                  [artifactId: 'java-web-project', classifier: 'debug', file: 'java-web-project-1.0-SNAPSHOT.war', type: 'war'], 
@@ -52,7 +59,7 @@ pipeline {
                     protocol: 'http', 
                     repository: 'java-web-project', 
                     version: '1.0-SNAPSHOT'
-					 /*nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
+					 nexusPublisher nexusInstanceId: 'sonarnexuslocal3', \
                            nexusRepositoryId: 'java-web-project', \
                            packages: [[$class: 'MavenPackage', \
                            mavenAssetList: [[classifier: '', extension: '', filePath: "target\\${pom.artifactId}-${pom.version}.${pom.packaging}"], \
@@ -60,11 +67,11 @@ pipeline {
                             mavenCoordinate: [artifactId: "${pom.artifactId}", \
                             groupId: "${pom.groupId}", \
                             packaging: "${pom.packaging}", \
-                            version: "${pom.version}-${env.BUILD_NUMBER}"]]]*/
+                            version: "${pom.version}-${env.BUILD_NUMBER}"]]]
 				}			
             }   
 		}
-    }		
+    }*/	
 /*	        stage('Sonarqube analysis') {
 			    environment {
                          scannerHome = tool 'sonarqubescanner'
